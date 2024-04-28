@@ -1,0 +1,3 @@
+org.eclipse.jdt.core.formatter.comment.line_length=400
+org.eclipse.jdt.core.formatter.lineSplit=400
+org.eclipse.jdt.core.compiler.problem.enablePreviewFeatures=disabled
