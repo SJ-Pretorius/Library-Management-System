@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,6 +11,8 @@ import java.util.Scanner;
 public class LibraryOperations {
     private Library library = new Library();
     private Scanner scanner = new Scanner(System.in);
+
+    private final static int DUEDAYS = 5;
 
     /**
      * Adds example books and members to the library.
@@ -28,6 +31,7 @@ public class LibraryOperations {
     /**
      * Prompts the user to input details of a new book and adds it to the library.
      */
+
     public void addBook() {
         // Prompt user to input book details
         System.out.print("Enter book title: ");
@@ -60,18 +64,18 @@ public class LibraryOperations {
     public void listAllBooks() {
         // Retrieve a list of all books in the library
         List<Book> books = library.listAllBooks();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLL-yyyy HH:mm");
         if (books.isEmpty()) {
             System.out.println("No Books.");
         } else {
             // Print details of each book
-            String available;
             for (Book book : books) {
                 if (book.isAvailable()) {
-                    available = "Yes";
+                    System.out.println("Title: " + book.getTitle() + " | Author: " + book.getAuthor() + " | ISBN: " + book.getIsbn() + " | Available: Yes");
                 } else {
-                    available = "No";
+                    System.out.println("Title: " + book.getTitle() + " | Author: " + book.getAuthor() + " | ISBN: " + book.getIsbn() + " | Available: No | Due Date: " + formatter.format(book.getBookReturnDueDate()));
                 }
-                System.out.println("Title: " + book.getTitle() + " | Author: " + book.getAuthor() + " | ISBN: " + book.getIsbn() + " | Available: " + available);
+
             }
         }
     }
@@ -230,7 +234,7 @@ public class LibraryOperations {
         String checkoutIsbn = scanner.nextLine();
 
         // Check out the book to the member
-        library.checkoutBook(checkoutIsbn, checkoutMember);
+        library.checkoutBook(checkoutIsbn, checkoutMember, DUEDAYS);
     }
 
     /**
@@ -253,11 +257,12 @@ public class LibraryOperations {
     public void listCheckOutBooks() {
         // Retrieve a map of all borrowed books
         Map<Book, Member> borrowedBooks = library.listBorrowedBooks();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLL-yyyy HH:mm");
         for (Map.Entry<Book, Member> entry : borrowedBooks.entrySet()) {
             Book book = entry.getKey();
             Member member = entry.getValue();
             // Print details of each borrowed book
-            System.out.println("Book: " + book.getTitle() + " | ISBN: " + book.getIsbn() + " | Member Name: " + member.getName() + " | Member Email: " + member.getEmail());
+            System.out.println("Book: " + book.getTitle() + " | ISBN: " + book.getIsbn() + " | Member Name: " + member.getName() + " | Member Email: " + member.getEmail() + " | Due Date: " + formatter.format(book.getBookReturnDueDate()));
         }
     }
 }

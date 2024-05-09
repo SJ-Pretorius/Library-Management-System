@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -182,7 +184,7 @@ public class Library {
      * @param memberName The name of the member checking out the book.
      * @throws IllegalStateException If the book is not available for checkout.
      */
-    public void checkoutBook(String isbn, String memberName) {
+    public void checkoutBook(String isbn, String memberName, int dueDays) {
         Book book = searchBooksByIsbn(isbn);
         if (book == null) {
             throw new IllegalStateException("Book not found.");
@@ -192,6 +194,8 @@ public class Library {
             throw new IllegalStateException("Book is not available for checkout.");
         }
         book.toggleAvailability();
+        LocalDateTime bookReturnDueDate = LocalDateTime.now().plus(dueDays, ChronoUnit.DAYS);
+        book.setBookReturnDueDate(bookReturnDueDate, dueDays);
         borrowedBooks.put(book, member);
         assert !book.isAvailable() : "Book availability not updated after checkout.";
     }

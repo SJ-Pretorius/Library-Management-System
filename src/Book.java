@@ -1,3 +1,6 @@
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+
 /**
  * Represents a book with title, author, and ISBN information.
  */
@@ -6,6 +9,7 @@ public class Book {
     private String author;
     private String isbn;
     private boolean isAvailable;
+    private LocalDateTime bookReturnDueDate;
 
     /**
      * Constructs a new Book object with the specified title, author, and ISBN.
@@ -75,5 +79,13 @@ public class Book {
      */
     public void toggleAvailability() {
         this.isAvailable = !this.isAvailable;
+    }
+
+    public LocalDateTime getBookReturnDueDate() {
+        return bookReturnDueDate;
+    }
+
+    public void setBookReturnDueDate(LocalDateTime e, int dueDays) {
+        bookReturnDueDate = LocalDateTime.now().plus(dueDays, ChronoUnit.DAYS);
     }
 }
