@@ -4,8 +4,8 @@ import java.util.Scanner;
  * Facilitates all user interactions with the library by offering comprehensive prompts.
  */
 public class Main {
-    static Scanner scanner = new Scanner(System.in);
     static LibraryOperations theLibrary = new LibraryOperations();
+    static Scanner scanner = new Scanner(System.in);
 
     /**
      * Main method to run the Library Management System.
@@ -14,12 +14,12 @@ public class Main {
         clearConsole();
         System.out.println();
         printDash(44);
-        System.out.println("Salomon Jansen Pretorius\nStudent Number: 20231348\nJD521 Formative Assessment 2 (19 April 2024) \nCTU Training Solutions Gqeberha");
+        System.out.println("Salomon Jansen Pretorius\nStudent Number: 20231348\nJD521 Formative Assessment 3 (10 May 2024) \nCTU Training Solutions Gqeberha");
         printDash(44);
-        theLibrary.addExampleData();
+        theLibrary.loadData();
         while (true) {
             try {
-                displayMenu("Library Management System", "1. Manage Books", "2. Manage Members", "3. Search For a Book", "4. Checkout a Book", "5. Return a Book", "6. List Checked Out Books", "7. Exit");
+                displayMenu("Library Management System", "1. Manage Books", "2. Manage Members", "3. Manage Fines", "4. Search For a Book", "5. Checkout a Book", "6. Return a Book", "7. List Checked Out Books", "8. Save And Exit");
                 String choice = scanner.nextLine();
                 clearConsole();
                 switch (choice) {
@@ -30,9 +30,12 @@ public class Main {
                         manageMembers();
                         break;
                     case "3":
-                        searchBooks();
+                        manageFines();
                         break;
                     case "4":
+                        searchBooks();
+                        break;
+                    case "5":
                         System.out.println("\nCheckout a Book");
                         printDash(15);
                         theLibrary.checkout();
@@ -43,7 +46,7 @@ public class Main {
                         System.out.println("\nPress enter to return to main menu.");
                         scanner.nextLine();
                         break;
-                    case "5":
+                    case "6":
                         System.out.println("\nReturn a Book");
                         printDash(14);
                         theLibrary.returnBook();
@@ -54,7 +57,7 @@ public class Main {
                         System.out.println("\nPress enter to return to main menu.");
                         scanner.nextLine();
                         break;
-                    case "6":
+                    case "7":
                         System.out.println("\nList Checked Out Books");
                         printDash(44);
                         System.out.println();
@@ -64,7 +67,8 @@ public class Main {
                         System.out.println("\nPress enter to return to main menu.");
                         scanner.nextLine();
                         break;
-                    case "7":
+                    case "8":
+                        theLibrary.saveData();
                         exit();
                     default:
                         System.out.println();
@@ -95,7 +99,7 @@ public class Main {
     /**
      * Manages book operations such as adding, removing, and listing books.
      */
-    public static void manageBooks() {
+    private static void manageBooks() {
         while (true) {
             displayMenu("Manage Books", "1. Add a Book", "2. Remove a Book", "3. List All Books", "4. Return To Main Menu");
             String choice = scanner.nextLine();
@@ -149,7 +153,7 @@ public class Main {
     /**
      * Manages member operations such as adding, removing, searching, and listing members.
      */
-    public static void manageMembers() {
+    private static void manageMembers() {
         while (true) {
             displayMenu("Manage Members", "1. Add a Member", "2. Remove a Member", "3. Search For a Member", "4. List All Members", "5. Return To Main Menu");
             String choice = scanner.nextLine();
@@ -208,10 +212,49 @@ public class Main {
         }
     }
 
+    private static void manageFines() {
+        while (true) {
+            displayMenu("Manage Fines", "1. Pay Fine", "2. List All Fines", "3. Return To Main Menu");
+            String choice = scanner.nextLine();
+            clearConsole();
+            switch (choice) {
+                case "1":
+                    System.out.println("\nPay Fine");
+                    printDash(8);
+                    theLibrary.payFine();
+                    printDash(11);
+                    System.out.println("Fine Payed.");
+                    printDash(11);
+                    System.out.println("\nPress enter to return to main menu.");
+                    scanner.nextLine();
+                    break;
+                case "2":
+                    System.out.println("\nList All Fines");
+                    printDash(44);
+                    System.out.println();
+                    theLibrary.listAllFines();
+                    System.out.println();
+                    printDash(44);
+                    System.out.println("\nPress enter to return to main menu.");
+                    scanner.nextLine();
+                    break;
+                case "3":
+                    break;
+                default:
+                    System.out.println();
+                    printDash(33);
+                    System.out.println("Invalid choice. Please try again.");
+                    printDash(33);
+                    continue;
+            }
+            break;
+        }
+    }
+
     /**
      * Searches for books based on various criteria such as title, author, or ISBN.
      */
-    public static void searchBooks() {
+    private static void searchBooks() {
         while (true) {
             displayMenu("Search For a Book", "1. Search For a Book By Title", "2. Search For a Book By Author", "3. Search For a Book By ISBN", "4. Return To Main Menu");
             String choice = scanner.nextLine();
@@ -260,7 +303,7 @@ public class Main {
     /**
      * Clears the console screen.
      */
-    public static void clearConsole() {
+    private static void clearConsole() {
         try {
             final String os = System.getProperty("os.name");
             if (os.contains("Windows")) {
@@ -279,7 +322,7 @@ public class Main {
      * @param title   The title of the menu.
      * @param options The options to be displayed in the menu.
      */
-    public static void displayMenu(String title, String... options) {
+    private static void displayMenu(String title, String... options) {
         System.out.println("\n" + title);
         int titleLength = title.length();
         for (int i = 0; i < titleLength; i++) {
@@ -297,7 +340,7 @@ public class Main {
      * 
      * @param amount The number of dashes to print.
      */
-    public static void printDash(int amount) {
+    private static void printDash(int amount) {
         for (int i = 0; i < amount; i++) {
             System.out.print("-");
         }
@@ -307,7 +350,7 @@ public class Main {
     /**
      * Exits the application.
      */
-    public static void exit() {
+    private static void exit() {
         System.out.println("Exiting the Library Management System.");
         scanner.close();
         System.exit(0);
