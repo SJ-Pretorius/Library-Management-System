@@ -1,4 +1,4 @@
-Lion, Zoo, 1234, true, null, 0, 0, null
+Lion, Zoo, 1234, false, 2024-05-24T21:07:27.031438, 0, 0, sj@pret.com
 Gatsby, Fitzgerald, 5678, true, null, 0, 0, null
 Mockingbird, Lee, 9012, true, null, 0, 0, null
 1984, Orwell, 3456, true, null, 0, 0, null

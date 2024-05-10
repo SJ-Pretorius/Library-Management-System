@@ -1,4 +1,3 @@
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -57,8 +56,7 @@ public class NotificationProcessing implements Runnable {
      * @param member The member who borrowed the book.
      */
     public void sendEmail(Book book, Member member) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-LLL-yyyy HH:mm"); // Format date and time
         // Print email notification message
-        System.out.println("Email: " + member.getEmail() + " Please return the book: " + book.getTitle() + " that should've been returned on " + formatter.format(book.getBookReturnDueDate()) + " and pay your fine of R" + member.getFines() + ".");
+        System.out.println("Email: " + member.getEmail() + " Please return the book: " + book.getTitle() + " and pay your fine of R" + member.getFines() + ".");
     }
 }
