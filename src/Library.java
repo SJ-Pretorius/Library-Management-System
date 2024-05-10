@@ -348,7 +348,7 @@ public class Library {
      * 
      * @return A map of borrowed books with their respective borrowers.
      */
-    public Map<Book, Member> listBorrowedBooks() {
+    synchronized Map<Book, Member> listBorrowedBooks() {
         return borrowedBooks;
     }
 
