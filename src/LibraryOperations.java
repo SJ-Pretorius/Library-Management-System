@@ -13,14 +13,15 @@ public class LibraryOperations {
     private Scanner scanner = new Scanner(System.in); // Scanner object for user input
 
     /**
-     * Adds example books and members to the library.
-     * <p>
-     * TO BE REMOVED WHEN ENTERING PRODUCTION.
+     * Loads data from files into the library.
      */
     public void loadData() {
         library.loadData();
     }
 
+    /**
+     * Saves data from the library to files.
+     */
     public void saveData() {
         library.saveData();
     }
