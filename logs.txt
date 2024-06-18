@@ -1,3 +1,6 @@
 2024-05-10T20:53:43.342393700 | A fine of 50 has been added to sj.
 2024-05-10T20:54:35.892327800 | Member: sj payed R50 in fines.
 2024-05-10T21:05:58.110763200 | Member: Sarah Johnson payed R50 in fines.
+2024-06-13T15:21:41.247916 | A fine of 50 has been added to Sarah.
+2024-06-18T21:10:34.067249700 | A fine of 50 has been added to Sarah.
+2024-06-18T21:11:58.310266300 | Member: Sarah payed R50 in fines.
